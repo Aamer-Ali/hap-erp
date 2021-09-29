@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavBar from "./components/navbar";
+import TeacherList from "./components/teacherList";
+import { Switch, Route, Redirect } from "react-router-dom";
+import TeacherDetails from "./components/teacherDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar />
+      <div className="content">
+        <Switch>
+          <Route path="/teacherList" component={TeacherList} />
+          <Route path="/teacherDetails/:id" component={TeacherDetails} />
+          <Redirect from="/" to="/teacherList" />
+
+          {/* <Route
+            path="/products"
+            render={(props) => <Products newsetProduct={"aamer"} {...props} />}
+          />
+          <Route path="/posts/:year?/:month?" component={Posts} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/" exact component={Home} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect from="/messages" to="/posts" />
+          <Redirect to="/not-found" /> */}
+        </Switch>
+      </div>
     </div>
   );
 }
