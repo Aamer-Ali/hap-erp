@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import avatar from "../../assets/avatar.jpeg";
 
-import EmployeeDocumnetsTab from "./employeeDocumentsTab";
-import EmployeeAttendaceTab from "./employeeAttendanceTab";
-import EmployeePayrollTab from "./employeePayrollTab";
-import EmployeeAppAccessTab from "./employeeAppAccessTab";
 import CustomTabs from "../common/customTabs";
+import EmployeeAddress from "./employeeInfo/employeeAddress";
+import EmployeeBankDetails from "./employeeInfo/employeeBankDetails";
+import EmployeeBasicInformation from "./employeeInfo/employeeBasicInformation";
+import EmployeeQualification from "./employeeInfo/employeeQualification";
+import EmployeePreviousExperience from "./employeeInfo/employeePreviopusExpereince";
+import EmployeeReference from "./employeeInfo/employeeReference";
 
 class EmployeeInfoTab extends Component {
   state = {
     tabs: [
-      EmployeeDocumnetsTab,
-      EmployeeAttendaceTab,
-      EmployeePayrollTab,
-      EmployeeAppAccessTab,
+      { name: EmployeeBasicInformation, title: "Basic Information" },
+      { name: EmployeeQualification, title: "Qualification" },
+      { name: EmployeePreviousExperience, title: "Previous Experience" },
+      { name: EmployeeReference, title: "Reference" },
+      { name: EmployeeAddress, title: "Address Details" },
+      { name: EmployeeBankDetails, title: "bank Deatils" },
     ],
   };
 
@@ -33,7 +37,7 @@ class EmployeeInfoTab extends Component {
             />
           </div>
           <div className="pt-5 align-middle mt-4 col-lg-9 col-12 col.sm-12,col-md-9">
-            <div className="largTitle text-primary">
+            <div className="largTitle ">
               {data ? data.EmployeeName : ""} -
               <span> {data ? data.EmployeeId : ""}</span>
             </div>

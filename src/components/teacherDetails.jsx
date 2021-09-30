@@ -8,15 +8,23 @@ import http from "../services/httpService";
 import config from "../config.json";
 import CustomTabs from "./common/customTabs";
 
+import EmployeeAddress from "./teacherDetails/employeeInfo/employeeAddress";
+import EmployeeBankDetails from "./teacherDetails/employeeInfo/employeeBankDetails";
+import EmployeeBasicInformation from "./teacherDetails/employeeInfo/employeeBasicInformation";
+import EmployeeQualification from "./teacherDetails/employeeInfo/employeeQualification";
+import EmployeePreviousExperience from "./teacherDetails/employeeInfo/employeePreviopusExpereince";
+import EmployeeReference from "./teacherDetails/employeeInfo/employeeReference";
+
 class TeacherDetails extends Component {
   state = {
     employeeInfo: [],
+
     tabs: [
-      EmployeeInfoTab,
-      EmployeeDocumnetsTab,
-      EmployeeAttendaceTab,
-      EmployeePayrollTab,
-      EmployeeAppAccessTab,
+      { name: EmployeeInfoTab, title: "Employee Info" },
+      { name: EmployeeDocumnetsTab, title: "Documnets" },
+      { name: EmployeeAttendaceTab, title: "Attendance" },
+      { name: EmployeePayrollTab, title: "Payroll" },
+      { name: EmployeeAppAccessTab, title: "App Access" },
     ],
   };
 

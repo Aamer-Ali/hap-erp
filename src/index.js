@@ -5,6 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckSquare,
+  faCoffee,
+  faSearch,
+  faAddressBook
+} from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import "font-awesome/css/font-awesome.css";
+
+library.add(fab, faCheckSquare, faCoffee, faSearch,faAddressBook);
 
 ReactDOM.render(
   // <React.StrictMode>

@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 import http from "../services/httpService";
 import config from "../config.json";
 import avatar from "../assets/avatar.jpeg";
-// import { EmployeeModel } from "../models/employeeModel";
+import Input from "./common/input";
+import DropDwon from "./common/dropDown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class TeacherList extends Component {
   state = {
-    // allTeachers: (EmployeeModel = []),
     allTeachers: [],
     searchText: "",
     dropDownValue: 0,
+    ddOptions: [{}],
+    loadingData: true,
   };
 
   async componentDidMount() {
+    this.setState({ loadingData: true });
     const body = {
       Action: 1,
       InstituteId: 1,
@@ -27,7 +32,23 @@ class TeacherList extends Component {
       body
     );
     const { data } = response;
-    this.setState({ allTeachers: data, filterTeacher: data });
+
+    const dropDownPostBody = {
+      Action: 7,
+      LookupType: 0,
+      LookupId: 1,
+      SelectionType: 1,
+    };
+    const ddResponse = await http.post(
+      config.endPoint + "common/common/GetDropDownList",
+      dropDownPostBody
+    );
+    const { data: dropDownData } = ddResponse;
+    this.setState({
+      allTeachers: data,
+      ddOptions: dropDownData,
+      loadingData: false,
+    });
   }
 
   onChange = (e) => {
@@ -51,29 +72,12 @@ class TeacherList extends Component {
       body
     );
     const { data } = response;
-    this.setState({ allTeachers: data, filterTeacher: data });
+    this.setState({ allTeachers: data });
   };
 
   handleDropDownSelect = (e) => {
     this.setState({ dropDownValue: e.currentTarget.value });
   };
-
-  // searchData = (searchText) => {
-  //   // const origianlTeachersList = [...this.state.allTeachers];
-  //   // console.log(origianlTeachersList);
-  //   // let filterTeacher = [...this.state.allTeachers];
-  //   if (searchText) {
-  //     console.log("Seraching");
-  //     const teachers = this.state.allTeachers.filter((teacher) =>
-  //       teacher.EmployeeName.toLowerCase().startsWith(searchText.toLowerCase())
-  //     );
-  //     this.setState({ allTfileachers: teachers });
-  //   } else {
-  //     console.log("Clear");
-  //     console.log(origianlTeachersList);
-  //     this.setState({ allTeachers: origianlTeachersList });
-  //   }
-  // };
 
   render() {
     const { searchText, allTeachers } = this.state;
@@ -86,32 +90,27 @@ class TeacherList extends Component {
       <div className="container mt-4">
         <div className="form-group">
           <div className="row">
+            {!this.state.loadingData ? (
+              <div className="col-12 col-sm-1 col-lg-3 col-md-3 mb-3">
+                <DropDwon
+                  options={this.state.ddOptions}
+                  onChange={this.handleDropDownSelect}
+                  label="Select Department"
+                />
+              </div>
+            ) : null}
+
             <div className="col-12 col-sm-1 col-lg-3 col-md-3 mb-3">
-              <select
-                onChange={this.handleDropDownSelect}
-                className="cform-control form-select"
-              >
-                <option default value="0">
-                  Select Departmetnt
-                </option>
-                <option value="1">Teaching</option>
-                <option value="2">Non Teacheing</option>
-                <option value="3">Vice Pricipal</option>
-              </select>
-            </div>
-            <div className="col-12 col-sm-1 col-lg-3 col-md-3 mb-3">
-              <input
-                onChange={this.onChange}
-                name="search"
+              <Input
+                name="serach"
                 id="serach"
-                placeholder="Search By Name"
-                value={this.state.searchText}
-                className="form-control"
+                placeholder="Serach By Name"
+                onChange={this.onChange}
               />
             </div>
-            <div className="col-12 col-sm-1 col-lg-1 col-md-1">
+            <div className="col-12 col-sm-2 col-lg-2 col-md-2">
               <button onClick={this.handelClick} className="btn btn-primary">
-                Serach
+                Serach <FontAwesomeIcon icon="search" />
               </button>
             </div>
           </div>
@@ -167,39 +166,3 @@ class TeacherList extends Component {
 }
 
 export default TeacherList;
-
-// class EmployeeModel {
-//   constructor(
-//     EmployeeId,
-//     DepartmentId,
-//     DepartmentName,
-//     DesignationId,
-//     DesignationName,
-//     EmployeeCode,
-//     InstituteId,
-//     EmployeeName,
-//     MobileNo,
-//     Email,
-//     DateOfBirth,
-//     JoiningDate,
-//     PhotoUrl,
-//     Description,
-//     JobTimingId
-//   ) {
-//     this.EmployeeId = EmployeeId;
-//     this.DepartmentId = DepartmentId;
-//     this.DepartmentName = DepartmentName;
-//     this.DesignationId = DesignationId;
-//     this.DesignationName = DesignationName;
-//     this.EmployeeCode = EmployeeCode;
-//     this.InstituteId = InstituteId;
-//     this.EmployeeName = EmployeeName;
-//     this.MobileNo = MobileNo;
-//     this.Email = Email;
-//     this.DateOfBirth = DateOfBirth;
-//     this.JoiningDate = JoiningDate;
-//     this.PhotoUrl = PhotoUrl;
-//     this.Description = Description;
-//     this.JobTimingId = JobTimingId;
-//   }
-// }

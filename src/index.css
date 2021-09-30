@@ -50,4 +50,10 @@ code {
 .largTitle {
   font-size: 30px;
   font-weight: bold;
+  color: black;
 }
+
+/* nav-item.nav-link.active {
+  color: #fff;
+  background-color: red;
+} */

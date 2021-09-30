@@ -3,6 +3,7 @@ import NavBar from "./components/navbar";
 import TeacherList from "./components/teacherList";
 import { Switch, Route, Redirect } from "react-router-dom";
 import TeacherDetails from "./components/teacherDetails";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   return (
