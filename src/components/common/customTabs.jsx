@@ -5,6 +5,8 @@ class CustomTabs extends Component {
   render() {
     // this.props.tabs.map((tab) => console.log(tab.title));
 
+    // console.log("--------> Custome Tab", this.props.employeeInfo);
+
     return (
       <Tabs
         // className="nav nav-pills nav-fill nav-justify justify-content-center "
@@ -20,7 +22,7 @@ class CustomTabs extends Component {
             title={[tab.title]}
           >
             <tab.name
-              data={this.props.employeeInfo ? this.props.employeeInfo[0] : null}
+              data={this.props.employeeInfo ? this.props.employeeInfo : null}
             />
           </Tab>
         ))}

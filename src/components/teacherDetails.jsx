@@ -8,17 +8,10 @@ import http from "../services/httpService";
 import config from "../config.json";
 import CustomTabs from "./common/customTabs";
 
-import EmployeeAddress from "./teacherDetails/employeeInfo/employeeAddress";
-import EmployeeBankDetails from "./teacherDetails/employeeInfo/employeeBankDetails";
-import EmployeeBasicInformation from "./teacherDetails/employeeInfo/employeeBasicInformation";
-import EmployeeQualification from "./teacherDetails/employeeInfo/employeeQualification";
-import EmployeePreviousExperience from "./teacherDetails/employeeInfo/employeePreviopusExpereince";
-import EmployeeReference from "./teacherDetails/employeeInfo/employeeReference";
-
 class TeacherDetails extends Component {
   state = {
     employeeInfo: [],
-
+    isLoading: true,
     tabs: [
       { name: EmployeeInfoTab, title: "Employee Info" },
       { name: EmployeeDocumnetsTab, title: "Documnets" },
@@ -29,6 +22,7 @@ class TeacherDetails extends Component {
   };
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
     const getEmployeeInformation = "hr/Employee/GetEmployee";
     const body = {
       Action: 2,
@@ -43,17 +37,23 @@ class TeacherDetails extends Component {
       body
     );
     const { data } = response;
-    this.setState({ employeeInfo: data });
+    this.setState({ employeeInfo: data, isLoading: false });
   }
 
   render() {
     return (
-      <div className="container">
-        <h4>Employee</h4>
-        <CustomTabs
-          tabs={this.state.tabs}
-          employeeInfo={this.state.employeeInfo}
-        />
+      <div>
+        {this.state.isLoading ? null : (
+          <div className="container">
+            <h4>Employee</h4>
+            {this.state.employeeInfo.lenght === 0 ? null : (
+              <CustomTabs
+                tabs={this.state.tabs}
+                employeeInfo={this.state.employeeInfo}
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }

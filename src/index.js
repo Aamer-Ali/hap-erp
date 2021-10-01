@@ -11,12 +11,12 @@ import {
   faCheckSquare,
   faCoffee,
   faSearch,
-  faAddressBook
+  faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import "font-awesome/css/font-awesome.css";
 
-library.add(fab, faCheckSquare, faCoffee, faSearch,faAddressBook);
+library.add(fab, faCheckSquare, faCoffee, faSearch, faAddressBook);
 
 ReactDOM.render(
   // <React.StrictMode>

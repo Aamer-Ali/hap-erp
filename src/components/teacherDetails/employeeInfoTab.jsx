@@ -23,6 +23,8 @@ class EmployeeInfoTab extends Component {
 
   render() {
     const { data } = this.props;
+    const employeeData = data[0];
+    // console.log("------> Employee Info Tab", employeeData);
 
     return (
       <div>
@@ -38,21 +40,38 @@ class EmployeeInfoTab extends Component {
           </div>
           <div className="pt-5 align-middle mt-4 col-lg-9 col-12 col.sm-12,col-md-9">
             <div className="largTitle ">
-              {data ? data.EmployeeName : ""} -
-              <span> {data ? data.EmployeeId : ""}</span>
+              {employeeData ? employeeData.EmployeeName : ""} -
+              <span className="badge rounded-pill bg-info">
+                {employeeData ? employeeData.EmployeeId : ""}
+              </span>
             </div>
             <span className="badge rounded-pill bg-secondary">
-              {data ? data.DepartmentName : ""}
+              {employeeData ? employeeData.DepartmentName : ""}
             </span>
             -
-            <span className=" badge rounded-pill bg-secondary">
-              {data ? data.DesignationName : ""}
+            <span className="badge rounded-pill bg-secondary">
+              {employeeData ? employeeData.DesignationName : ""}
             </span>
+            <div className="col-12 col-sm-5 col-lg-5 col-md-5 mt-2">
+              <span>
+                <button
+                  onClick={this.handelClick}
+                  className="btn btn-primary rounded-pill btn-sm me-1"
+                >
+                  Change Picture
+                </button>
+                <button
+                  onClick={this.handelClick}
+                  className="btn btn-success rounded-pill  btn-sm me-1"
+                >
+                  Edit Profile
+                </button>
+              </span>
+            </div>
           </div>
         </div>
-
         <div className="mt-4">
-          <CustomTabs tabs={this.state.tabs} />
+          <CustomTabs employeeInfo={[employeeData]} tabs={this.state.tabs} />
         </div>
       </div>
     );

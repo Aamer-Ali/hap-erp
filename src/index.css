@@ -57,3 +57,16 @@ code {
   color: #fff;
   background-color: red;
 } */
+
+.myButton {
+  background-color: #04aa6d;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 80%;
+  margin: 4px 2px;
+}
